@@ -1,0 +1,20 @@
+.gradle/
+build/
+.idea/
+*.iml
+run/*
+!run/mods/
+run/mods/*
+!run/mods/veil-fabric-1.21.1-4.5.0+mystrix.1.jar
+run-server/
+
+# Local runtime, generated distributions and private machine settings
+run/
+libs/nightminigames-*.jar
+.vscode/
+*.log
+*.hprof
+.env
+.env.*
+!.env.example
+local.properties

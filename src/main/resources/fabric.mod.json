@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "id": "nightminigames",
+  "version": "${version}",
+  "name": "NIghtminigames",
+  "description": "Fabric 1.21.1 con Veil Mystrix, GeckoLib, linterna, oscuridad global y música ambiental en bucle.",
+  "authors": [
+    "Greto"
+  ],
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "dev.greto.nightminigames.NightminigamesMod"
+    ],
+    "client": [
+      "dev.greto.nightminigames.client.NightminigamesClient"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.19.5",
+    "minecraft": "~1.21.1",
+    "java": ">=21",
+    "fabric-api": "*",
+    "veil": ">=4.5.0",
+    "geckolib": ">=4.9.3"
+  },
+  "suggests": {"mystrixpoints": "*", "mapmitryx": "*"},
+  "mixins": [
+    "nightminigames.client.mixins.json",
+    "nightminigames.mixins.json"
+  ]
+}

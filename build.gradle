@@ -1,0 +1,169 @@
+plugins {
+    id 'net.fabricmc.fabric-loom-remap' version '1.18.4'
+    id 'maven-publish'
+}
+
+version = project.mod_version
+group = project.maven_group
+
+base {
+    archivesName = project.archives_base_name
+}
+
+repositories {
+    mavenCentral()
+    maven { url = 'https://maven.fabricmc.net/' }
+    maven {
+        name = 'GeckoLib'
+        url = 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/'
+        content { includeGroup 'software.bernie.geckolib' }
+    }
+}
+
+loom {
+    runs {
+        client {
+            client()
+            configName = 'Nightminigames Client (Fabric 1.21.1)'
+            runDir = 'run'
+            ideConfigGenerated = true
+        }
+        server {
+            server()
+            configName = 'Nightminigames Server (Fabric 1.21.1)'
+            runDir = 'run-server'
+            ideConfigGenerated = true
+        }
+    }
+}
+
+configurations {
+    runtimeModDownloads {
+        canBeConsumed = false
+        canBeResolved = true
+        transitive = false
+    }
+}
+
+dependencies {
+    minecraft "com.mojang:minecraft:${project.minecraft_version}"
+    mappings loom.officialMojangMappings()
+    modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+    modCompileOnly "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
+    modCompileOnly files('libs/veil-fabric-1.21.1-4.5.0+mystrix.1.jar')
+    compileOnly files('libs/mystrixpoints-api.jar')
+    modCompileOnly "software.bernie.geckolib:geckolib-fabric-1.21.1:${project.geckolib_version}"
+    runtimeModDownloads "software.bernie.geckolib:geckolib-fabric-1.21.1:${project.geckolib_version}"
+    runtimeModDownloads "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
+}
+
+def veilJarName = 'veil-fabric-1.21.1-4.5.0+mystrix.1.jar'
+
+tasks.register('prepareRunMods') {
+    group = 'nightminigames'
+    description = 'Instala Veil, GeckoLib y Fabric API; elimina LightSystem incompatible.'
+    inputs.files(configurations.runtimeModDownloads)
+    inputs.file(layout.projectDirectory.file("libs/${veilJarName}"))
+    doLast {
+        def clientMods = layout.projectDirectory.dir('run/mods').asFile
+        def serverMods = layout.projectDirectory.dir('run-server/mods').asFile
+        clientMods.mkdirs()
+        serverMods.mkdirs()
+        def veilJar = layout.projectDirectory.file("libs/${veilJarName}").asFile
+        if (!veilJar.isFile()) throw new GradleException("Falta ${veilJarName}")
+        [clientMods, serverMods].each { folder ->
+            folder.listFiles()?.findAll { file ->
+                file.isFile() && file.name.endsWith('.jar') && (
+                    file.name.startsWith('veil-fabric-1.21.1-') ||
+                    file.name.startsWith('geckolib-fabric-1.21.1-') ||
+                    file.name.startsWith('fabric-api-') ||
+                    file.name.startsWith('lightsystem-')
+                )
+            }?.each { it.delete() }
+            configurations.runtimeModDownloads.files.each { dep ->
+                java.nio.file.Files.copy(dep.toPath(), new File(folder, dep.name).toPath(), java.nio.file.StandardCopyOption.REPLACE_EXISTING)
+            }
+        }
+        java.nio.file.Files.copy(veilJar.toPath(), new File(clientMods, veilJarName).toPath(), java.nio.file.StandardCopyOption.REPLACE_EXISTING)
+    }
+}
+
+tasks.named('runClient') { dependsOn tasks.named('prepareRunMods') }
+tasks.named('runServer') { dependsOn tasks.named('prepareRunMods') }
+
+processResources {
+    inputs.property('version', project.version)
+    filesMatching('fabric.mod.json') {
+        expand(version: project.version)
+    }
+}
+
+tasks.withType(JavaCompile).configureEach { options.release = 21 }
+java {
+    toolchain.languageVersion = JavaLanguageVersion.of(21)
+    withSourcesJar()
+}
+
+jar {
+    from('LICENSE-NOTICE.txt')
+}
+
+
+def nightVariants = layout.buildDirectory.dir('generated/night-variants')
+
+tasks.register('generateNightVariants') {
+    group = 'nightminigames'
+    inputs.file(layout.projectDirectory.file('src/main/resources/fabric.mod.json'))
+    inputs.property('version', project.version)
+    outputs.dir(nightVariants)
+    doLast {
+        def template = new groovy.json.JsonSlurper().parseText(
+            layout.projectDirectory.file('src/main/resources/fabric.mod.json').asFile.getText('UTF-8').replace('${version}', project.version.toString())
+        )
+        ['client', 'server'].each { side ->
+            def contents = new groovy.json.JsonSlurper().parseText(groovy.json.JsonOutput.toJson(template))
+            contents.environment = side
+            if (side == 'server') {
+                contents.entrypoints.remove('client')
+                contents.mixins = contents.mixins.findAll { it != 'nightminigames.client.mixins.json' }
+                contents.depends.remove('veil')
+            }
+            def destination = nightVariants.get().dir(side).file('fabric.mod.json').asFile
+            destination.parentFile.mkdirs()
+            destination.setText(groovy.json.JsonOutput.prettyPrint(groovy.json.JsonOutput.toJson(contents)), 'UTF-8')
+        }
+    }
+}
+
+['client', 'server'].each { side ->
+    def suffix = side == 'client' ? 'Client' : 'Server'
+    tasks.register("nightminigames${suffix}Jar", Jar) {
+        group = 'nightminigames'
+        description = "Genera el JAR independiente de Nightminigames para ${side}."
+        dependsOn tasks.named('remapJar'), tasks.named('generateNightVariants')
+        destinationDirectory = layout.projectDirectory.dir('libs')
+        archiveFileName = "nightminigames-${side}-${project.mod_version}+1.21.1.jar"
+        duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+        from({ nightVariants.get().dir(side).file('fabric.mod.json').asFile })
+        from({ zipTree(tasks.named('remapJar').get().archiveFile.get().asFile) }) {
+            exclude 'fabric.mod.json'
+            exclude 'META-INF/MANIFEST.MF'
+            if (side == 'server') {
+                exclude 'dev/greto/nightminigames/client/**'
+                exclude 'nightminigames.client.mixins.json'
+                exclude 'assets/nightminigames/shaders/**'
+                exclude 'assets/nightminigames/mystrix/**'
+            }
+        }
+    }
+}
+
+tasks.register('nightminigamesDistribuciones') {
+    group = 'nightminigames'
+    description = 'Construye dos JAR de producción separados en libs.'
+    dependsOn tasks.named('nightminigamesClientJar'), tasks.named('nightminigamesServerJar')
+}
+
+tasks.named('build') {
+    dependsOn tasks.named('nightminigamesDistribuciones')
+}

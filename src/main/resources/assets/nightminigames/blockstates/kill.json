@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "nightminigames:block/kill_empty"
+    }
+  }
+}

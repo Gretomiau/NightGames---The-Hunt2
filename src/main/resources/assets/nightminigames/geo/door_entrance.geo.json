@@ -1,0 +1,219 @@
+{
+  "format_version": "1.12.0",
+  "minecraft:geometry": [
+    {
+      "description": {
+        "identifier": "geometry.flashgame.door_entrance",
+        "texture_width": 512,
+        "texture_height": 512,
+        "visible_bounds_width": 8,
+        "visible_bounds_height": 8.5,
+        "visible_bounds_offset": [
+          0,
+          3.75,
+          0
+        ]
+      },
+      "bones": [
+        {
+          "name": "bb_main",
+          "pivot": [
+            0,
+            0,
+            0
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -56,
+                0,
+                -8
+              ],
+              "size": [
+                4,
+                108,
+                16
+              ],
+              "uv": [
+                0,
+                78
+              ]
+            },
+            {
+              "origin": [
+                52,
+                0,
+                -8
+              ],
+              "size": [
+                4,
+                108,
+                16
+              ],
+              "uv": [
+                40,
+                78
+              ]
+            },
+            {
+              "origin": [
+                -56,
+                108,
+                -8
+              ],
+              "size": [
+                112,
+                4,
+                16
+              ],
+              "uv": [
+                0,
+                58
+              ]
+            }
+          ]
+        },
+        {
+          "name": "waist",
+          "pivot": [
+            0,
+            56,
+            0
+          ]
+        },
+        {
+          "name": "lower_door",
+          "parent": "waist",
+          "pivot": [
+            -32,
+            4,
+            0
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -169,
+                121,
+                -3
+              ],
+              "size": [
+                108,
+                52,
+                6
+              ],
+              "pivot": [
+                -117,
+                56,
+                0
+              ],
+              "rotation": [
+                0,
+                0,
+                90
+              ],
+              "uv": {
+                "north": {
+                  "uv": [
+                    80,
+                    78
+                  ],
+                  "uv_size": [
+                    108,
+                    52
+                  ]
+                },
+                "east": {
+                  "uv": [
+                    80,
+                    188
+                  ],
+                  "uv_size": [
+                    6,
+                    52
+                  ]
+                },
+                "south": {
+                  "uv": [
+                    80,
+                    130
+                  ],
+                  "uv_size": [
+                    108,
+                    52
+                  ]
+                },
+                "west": {
+                  "uv": [
+                    188,
+                    84
+                  ],
+                  "uv_size": [
+                    6,
+                    52
+                  ]
+                },
+                "up": {
+                  "uv": [
+                    188,
+                    188
+                  ],
+                  "uv_size": [
+                    -108,
+                    -6
+                  ]
+                },
+                "down": {
+                  "uv": [
+                    296,
+                    84
+                  ],
+                  "uv_size": [
+                    -108,
+                    -6
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "upper_door",
+          "parent": "waist",
+          "pivot": [
+            -32,
+            74,
+            0
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -119,
+                123,
+                -3
+              ],
+              "size": [
+                108,
+                52,
+                6
+              ],
+              "pivot": [
+                -67,
+                56,
+                0
+              ],
+              "rotation": [
+                0,
+                0,
+                90
+              ],
+              "uv": [
+                0,
+                0
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

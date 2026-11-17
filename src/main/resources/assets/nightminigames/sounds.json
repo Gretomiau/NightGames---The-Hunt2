@@ -1,0 +1,87 @@
+{
+  "flashlight_toggle": {
+    "subtitle": "subtitles.nightminigames.flashlight_toggle",
+    "sounds": [
+      {
+        "name": "nightminigames:flashlight/toggle"
+      }
+    ]
+  },
+  "ambient_loop": {
+    "sounds": [
+      {
+        "name": "nightminigames:ambient/loop",
+        "stream": true,
+        "preload": false
+      }
+    ]
+  },
+  "power_off": {
+    "sounds": [
+      {
+        "name": "nightminigames:ambient/power_off"
+      }
+    ]
+  },
+  "power_on": {
+    "sounds": [
+      {
+        "name": "nightminigames:ambient/power_on"
+      }
+    ]
+  },
+  "key_collect": {
+    "subtitle": "subtitles.nightminigames.key_collect",
+    "sounds": [
+      "nightminigames:key/collect"
+    ]
+  },
+  "key_global_confirmation": {
+    "subtitle": "subtitles.nightminigames.key_global_confirmation",
+    "sounds": [
+      "nightminigames:key/global_confirmation"
+    ]
+  },
+  "key_hologram_whoosh": {
+    "subtitle": "subtitles.nightminigames.key_hologram_whoosh",
+    "sounds": [
+      "nightminigames:key/hologram_whoosh"
+    ]
+  },
+  "machine_insert": {
+    "subtitle": "subtitles.nightminigames.machine_insert",
+    "sounds": [
+      "nightminigames:machine/insert"
+    ]
+  },
+  "machine_lock": {
+    "subtitle": "subtitles.nightminigames.machine_lock",
+    "sounds": [
+      "nightminigames:machine/lock"
+    ]
+  },
+  "machine_click": {
+    "subtitle": "subtitles.nightminigames.machine_click",
+    "sounds": [
+      "nightminigames:machine/click"
+    ]
+  },
+  "machine_alarm": {
+    "subtitle": "subtitles.nightminigames.machine_alarm",
+    "sounds": [
+      "nightminigames:machine/alarm"
+    ]
+  },
+  "door_open": {
+    "subtitle": "subtitles.nightminigames.door_open",
+    "sounds": [
+      "nightminigames:door/door_open"
+    ]
+  },
+  "door_close": {
+    "subtitle": "subtitles.nightminigames.door_close",
+    "sounds": [
+      "nightminigames:door/door_close"
+    ]
+  }
+}

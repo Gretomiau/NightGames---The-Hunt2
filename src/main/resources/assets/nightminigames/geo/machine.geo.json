@@ -1,0 +1,315 @@
+{
+  "format_version": "1.12.0",
+  "minecraft:geometry": [
+    {
+      "description": {
+        "identifier": "geometry.flashgame.machine",
+        "texture_width": 128,
+        "texture_height": 128,
+        "visible_bounds_width": 8,
+        "visible_bounds_height": 8.5,
+        "visible_bounds_offset": [
+          0,
+          3.75,
+          0
+        ]
+      },
+      "bones": [
+        {
+          "name": "Base",
+          "pivot": [
+            0,
+            0,
+            0
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -24,
+                0,
+                -8
+              ],
+              "size": [
+                48,
+                16,
+                16
+              ],
+              "uv": {
+                "north": {
+                  "uv": [
+                    16,
+                    16
+                  ],
+                  "uv_size": [
+                    48,
+                    16
+                  ]
+                },
+                "east": {
+                  "uv": [
+                    0,
+                    16
+                  ],
+                  "uv_size": [
+                    16,
+                    16
+                  ]
+                },
+                "south": {
+                  "uv": [
+                    80,
+                    16
+                  ],
+                  "uv_size": [
+                    48,
+                    16
+                  ]
+                },
+                "west": {
+                  "uv": [
+                    0,
+                    16
+                  ],
+                  "uv_size": [
+                    16,
+                    16.5
+                  ]
+                },
+                "up": {
+                  "uv": [
+                    16,
+                    0
+                  ],
+                  "uv_size": [
+                    48,
+                    16
+                  ]
+                },
+                "down": {
+                  "uv": [
+                    64,
+                    16
+                  ],
+                  "uv_size": [
+                    48,
+                    -16
+                  ]
+                }
+              }
+            },
+            {
+              "origin": [
+                -24,
+                16,
+                7
+              ],
+              "size": [
+                48,
+                14,
+                1
+              ],
+              "uv": [
+                0,
+                35
+              ]
+            }
+          ]
+        },
+        {
+          "name": "boton 1",
+          "pivot": [
+            0,
+            0,
+            0
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -4,
+                19,
+                6
+              ],
+              "size": [
+                8,
+                8,
+                1
+              ],
+              "uv": [
+                23,
+                57
+              ]
+            },
+            {
+              "origin": [
+                -2,
+                21,
+                5
+              ],
+              "size": [
+                4,
+                4,
+                1
+              ],
+              "uv": [
+                42,
+                61
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Cerraduras",
+          "pivot": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "cerradura verde",
+          "parent": "Cerraduras",
+          "pivot": [
+            0,
+            0,
+            0
+          ],
+          "cubes": [
+            {
+              "origin": [
+                15,
+                16,
+                -3
+              ],
+              "size": [
+                6,
+                1,
+                6
+              ],
+              "uv": [
+                24,
+                50
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Pointokverde",
+          "parent": "cerradura verde",
+          "pivot": [
+            18,
+            19,
+            0
+          ]
+        },
+        {
+          "name": "Cerradura azul",
+          "parent": "Cerraduras",
+          "pivot": [
+            -18,
+            15,
+            2
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -21,
+                16,
+                -3
+              ],
+              "size": [
+                6,
+                1,
+                6
+              ],
+              "uv": [
+                0,
+                57
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Pointokazul",
+          "parent": "Cerradura azul",
+          "pivot": [
+            -17,
+            19,
+            -1
+          ]
+        },
+        {
+          "name": "cerradura rojo",
+          "parent": "Cerraduras",
+          "pivot": [
+            -6,
+            15,
+            2
+          ],
+          "cubes": [
+            {
+              "origin": [
+                3,
+                16,
+                -3
+              ],
+              "size": [
+                6,
+                1,
+                6
+              ],
+              "uv": [
+                48,
+                50
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Pointokrojo",
+          "parent": "cerradura rojo",
+          "pivot": [
+            6,
+            19,
+            -1
+          ]
+        },
+        {
+          "name": "cerradura amarillo",
+          "parent": "Cerraduras",
+          "pivot": [
+            -6,
+            15,
+            2
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -9,
+                16,
+                -3
+              ],
+              "size": [
+                6,
+                1,
+                6
+              ],
+              "uv": [
+                0,
+                50
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Pointokamarillo",
+          "parent": "cerradura amarillo",
+          "pivot": [
+            -5,
+            19,
+            -1
+          ]
+        }
+      ]
+    }
+  ]
+}

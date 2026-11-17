@@ -1,0 +1,5 @@
+Veil is licensed LGPL-3.0-only; the included Veil JAR is an unmodified copy
+of the custom compiled Veil JAR submitted by the user.
+GeckoLib is MIT licensed; fetched from official Maven at user build time.
+Fabric API is Apache-2.0 licensed; fetched from official Maven at user build time.
+Respect the licenses of all dependencies when redistributing binaries.

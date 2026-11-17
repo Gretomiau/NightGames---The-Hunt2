@@ -1,0 +1,9 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "nightminigames:block/machine_empty"
+      }
+    }
+  ]
+}

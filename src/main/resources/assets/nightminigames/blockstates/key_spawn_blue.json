@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "collected=false": {
+      "model": "minecraft:block/stone"
+    },
+    "collected=true": {
+      "model": "minecraft:block/stone"
+    }
+  }
+}
